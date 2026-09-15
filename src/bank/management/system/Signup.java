@@ -208,6 +208,50 @@ public class Signup extends JFrame implements ActionListener {
     @Override
     public  void actionPerformed(ActionEvent e){
 
+        String formno =  first;
+        String name = textName.getText();
+        String fname = textFname.getText();
+        String dob =  ((JTextField) dateChoser.getDateEditor().getUiComponent()).getText();  // dob have calender so we write that.
+        String gender = null;   //  radio so use null
+        if(r1.isSelected()){
+            gender ="Male";
+        }else if(r2.isSelected()){
+            gender = "Female";
+        }
+
+
+        // FOR EMAIL
+        String email = textEmail.getText();
+        String marital = null;
+        if(m1.isSelected()){
+            marital = "Married";
+
+        }else if(m2.isSelected()){
+            marital = "Unmarried";
+        }
+        else if(m3.isSelected()){
+            marital = "Other";
+        }
+
+        // for address (This all now sotre in DB)
+        String address = textAdd.getText();
+        String city = textCity.getText();
+        String pincode = textPin.getText();
+        String state = textState.getText();
+
+        try{
+            if(textName.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "fill all the fields");
+            }else {
+                Con con1 = new Con();
+            }
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
+
+
+
+
     }
 
 
