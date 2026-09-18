@@ -61,10 +61,10 @@ public class Signup extends JFrame implements ActionListener {
         labelfName.setBounds(100,240,200,30);
         add(labelfName);
 
-        textName = new JTextField();
-        textName.setFont(new Font("Raleway",Font.BOLD,14));
-        textName.setBounds(300,240,400,30);
-        add(textName);
+        textFname = new JTextField();
+        textFname.setFont(new Font("Raleway",Font.BOLD,14));
+        textFname.setBounds(300,240,400,30);
+        add(textFname);
 
         // -------------  DOB -----------------------
 
@@ -240,10 +240,16 @@ public class Signup extends JFrame implements ActionListener {
         String state = textState.getText();
 
         try{
+            // While we fill the form , if we forgot to write Name (blank ) then it will show the dialog box written with --> fill all the fields.
             if(textName.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "fill all the fields");
             }else {
-                Con con1 = new Con();
+                Con con1 = new Con(); //singup class 1
+                  String q = "insert into signup values('"+formno+"','"+name +"','"+fname +"','"+dob+"','"+gender+"','"+email+"','"+marital+"', '"+address+"','"+city+"','"+pincode+"','"+state+"' ) ";  // form n0 & other types should be written continuosly according to DB
+                con1.statement.executeUpdate(q);   // executeUpdate is used when we want to input the value in the table.
+                // after inserting the value in table then we have  to go to  the new class so   we make a new class here now,
+                new Signup2(first);  // we use here a new class where we named  Signup2.java
+                setVisible(false);
             }
         } catch (Exception E) {
             E.printStackTrace();
