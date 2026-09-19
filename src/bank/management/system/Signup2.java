@@ -125,13 +125,13 @@ public class Signup2 extends JFrame implements ActionListener {
      l10.setBounds(100,490,180,30);
      add(l10);
 
-     r1 = new JRadioButton();
+     r1 = new JRadioButton("Yes");
      r1.setFont(new Font("Raleway",Font.BOLD,14));
      r1.setBackground(new Color(252,208,76));
      r1.setBounds(350,490,100,30);
      add(r1);
 
-     r2 = new JRadioButton();
+     r2 = new JRadioButton("No");
      r2.setFont(new Font("Raleway",Font.BOLD,14));
      r2.setBackground(new Color(252,208,76));
      r2.setBounds(460,490,100,30);
@@ -144,13 +144,13 @@ public class Signup2 extends JFrame implements ActionListener {
      l11.setBounds(100,540,180,30);
      add(l11);
 
-     e1 = new JRadioButton();
+     e1 = new JRadioButton("Yes");
      e1.setFont(new Font("Raleway",Font.BOLD,14));
      e1.setBackground(new Color(252,208,76));
      e1.setBounds(350,540,100,30);
      add(e1);
 
-     e2 = new JRadioButton();
+     e2 = new JRadioButton("No");
      e2.setFont(new Font("Raleway",Font.BOLD,14));
      e2.setBackground(new Color(252,208,76));
      e2.setBounds(460,540,100,30);
@@ -160,7 +160,6 @@ public class Signup2 extends JFrame implements ActionListener {
      l12.setFont(new Font("Raleway",Font.BOLD,18));
      l12.setBounds(700,10,100,30);
      add(l12);
-
 
      JLabel l13 = new JLabel(formno);
      l13.setFont(new Font("Raleway",Font.BOLD,18));
@@ -179,7 +178,7 @@ public class Signup2 extends JFrame implements ActionListener {
 
 
      setLayout(null);
-     setSize(500,500);
+     setSize(850,750);
      setLocation(450,80);
      getContentPane().setBackground(new Color(252,208,76));
 
@@ -188,6 +187,43 @@ public class Signup2 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String rel = (String) comboBox.getSelectedItem(); // we decalred globally in the top named with comboBox  so that we didnot  write again & again.
+        String cate = (String) comboBox2.getSelectedItem();
+        String inc = (String) comboBox3.getSelectedItem();
+        String edu = (String) comboBox4.getSelectedItem();
+        String occ = (String) comboBox5.getSelectedItem();
+
+        String pan =  textPan.getText();
+        String addhar =  textAadhar.getText();
+
+        String scitizen =  " "; // we can write null also
+        if((r1.isSelected())){
+            scitizen ="yes";
+        }else if(r2.isSelected()){
+            scitizen = "NO";
+        }
+
+        String eAccount =  " "; // we can write null also
+        if((e1.isSelected())){
+            eAccount ="yes";
+        }else if(e2.isSelected()) {
+            eAccount ="NO";
+        }
+        try{
+            if(textPan.getText().equals("") ||  textAadhar.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Fill all the Fields");
+            }else {
+                Con c1 = new Con();
+                String q = "insert into Signuptwo values ('"+formno+"','"+rel+"','"+cate+"','"+inc+"','"+edu+"','"+occ+"','"+pan+"','"+addhar+"','"+scitizen+"','"+eAccount+"')";
+               c1.statement.executeUpdate(q);  // To insert the values into the table.
+                new Signup3(formno);
+                setVisible(false);  // this false means signup2 page is hide and new signup3 page is open .
+            }
+
+        }catch (Exception E){
+            E.printStackTrace();
+        }
+
 
     }
 
